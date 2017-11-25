@@ -1,0 +1,25 @@
+name: lxi-tools
+version: '1.11'
+summary: Open source LXI tools
+description: |
+  lxi-tools is a collection of open source software tools that enables control
+  of LXI compatible instruments such as modern oscilloscopes, power supplies,
+  spectrum analyzers etc.
+
+grade: stable
+confinement: strict
+
+apps:
+  lxi:
+    command: bin/lxi
+    completer: share/bash-completion/completions/lxi
+    plugs: [network]
+
+parts:
+  lxi-tools:
+    plugin: autotools
+    source: https://github.com/lxi/lxi-tools/releases/download/v1.11/lxi-tools-1.11.tar.xz
+    after: [liblxi]
+  liblxi:
+    plugin: autotools
+    source: https://github.com/lxi/liblxi/releases/download/v1.6/liblxi-1.6.tar.xz
