@@ -19,7 +19,9 @@ parts:
   lxi:
     plugin: autotools
     source: https://github.com/lxi/lxi-tools/releases/download/v1.11/lxi-tools-1.11.tar.xz
+    stage-packages: [libreadline-dev]
     after: [liblxi]
   liblxi:
     plugin: autotools
     source: https://github.com/lxi/liblxi/releases/download/v1.6/liblxi-1.6.tar.xz
+    stage-packages: [libavahi-core-dev,libavahi-common-dev,libavahi-client-dev]
