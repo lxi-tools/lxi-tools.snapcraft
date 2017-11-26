@@ -1,8 +1,8 @@
 name: lxi-tools
 version: '1.11'
 summary: Open source LXI tools
-description: |
-  lxi-tools is a collection of open source software tools that enables control
+description:
+  Lxi-tools is a collection of open source software tools that enables control
   of LXI compatible instruments such as modern oscilloscopes, power supplies,
   spectrum analyzers etc.
 
@@ -14,6 +14,7 @@ apps:
     command: bin/lxi
     completer: share/bash-completion/completions/lxi
     plugs: [home,network]
+    aliases: [lxi]
 
 parts:
   lxi-tools:
