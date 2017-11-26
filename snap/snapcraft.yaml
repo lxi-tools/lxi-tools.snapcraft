@@ -13,7 +13,7 @@ apps:
   lxi:
     command: bin/lxi
     completer: share/bash-completion/completions/lxi
-    plugs: [network]
+    plugs: [home,network]
 
 parts:
   lxi:
