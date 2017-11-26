@@ -13,7 +13,7 @@ apps:
   lxi:
     command: bin/lxi
     completer: share/bash-completion/completions/lxi
-    plugs: [home,network]
+    plugs: [home, network, avahi-observe]
     aliases: [lxi]
 
 parts:
@@ -25,4 +25,4 @@ parts:
   liblxi:
     plugin: autotools
     source: https://github.com/lxi/liblxi/releases/download/v1.6/liblxi-1.6.tar.xz
-    stage-packages: [libavahi-core-dev,libavahi-common-dev,libavahi-client-dev]
+    stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev]
