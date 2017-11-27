@@ -20,10 +20,10 @@ apps:
 parts:
   lxi-tools:
     plugin: autotools
-    source: https://github.com/lxi/lxi-tools.git
+    source: https://github.com/lxi-tools/lxi-tools.git
     stage-packages: [libreadline-dev]
     after: [liblxi]
   liblxi:
     plugin: autotools
-    source: https://github.com/lxi/liblxi.git
+    source: https://github.com/lxi-tools/liblxi.git
     stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev]
