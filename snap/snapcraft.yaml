@@ -8,6 +8,7 @@ description: |
 
 grade: stable
 confinement: strict
+icon: gui/lxi-tools_256x256.png
 
 apps:
   lxi:
