@@ -26,4 +26,4 @@ parts:
   liblxi:
     plugin: autotools
     source: https://github.com/lxi-tools/liblxi.git
-    stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev]
+    stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev, libxml2-dev]
