@@ -16,13 +16,28 @@ apps:
     completer: share/bash-completion/completions/lxi
     plugs: [home, network, avahi-observe]
     aliases: [lxi]
+  lxi-gui:
+    command: desktop-launch lxi-gui
+    plugs: [home, network, avahi-observe, desktop]
 
 parts:
   lxi-tools:
     plugin: autotools
     source: https://github.com/lxi-tools/lxi-tools.git
-    stage-packages: [libreadline-dev]
-    after: [liblxi]
+    build: |
+      ./autogen.sh
+      ./configure --prefix= --enable-lxi-gui
+      make STAGE=$SNAPCRAFT_STAGE
+    install: make install DESTDIR=$SNAPCRAFT_PART_INSTALL
+    build-packages: [pkg-config, qt5-default, qt5-qmake, qtbase5-dev]
+    stage-packages:
+      - libreadline-dev
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5widgets5
+      - libqt5dbus5
+      - libqt5svg5
+    after: [liblxi, desktop-qt5]
   liblxi:
     plugin: autotools
     source: https://github.com/lxi-tools/liblxi.git
