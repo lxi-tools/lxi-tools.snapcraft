@@ -29,14 +29,19 @@ parts:
       ./configure --prefix= --enable-lxi-gui
       make STAGE=$SNAPCRAFT_STAGE
     install: make install DESTDIR=$SNAPCRAFT_PART_INSTALL
-    build-packages: [pkg-config, qt5-default, qt5-qmake, qtbase5-dev]
-    stage-packages:
+    build-packages:
+      - pkg-config
+      - qt5-default
+      - qt5-qmake
+      - qtbase5-dev
       - libreadline-dev
+    stage-packages:
       - libqt5core5a
       - libqt5gui5
       - libqt5widgets5
       - libqt5dbus5
       - libqt5svg5
+      - libreadline6
     after: [liblxi, desktop-qt5]
   liblxi:
     plugin: autotools
