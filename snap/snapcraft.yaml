@@ -8,7 +8,7 @@ description: |
 
 grade: stable
 confinement: strict
-icon: snap/icon/lxi-tools_256x256.png
+icon: snap/gui/lxi-tools_256x256.png
 
 apps:
   lxi:
