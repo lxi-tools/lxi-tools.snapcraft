@@ -42,6 +42,7 @@ parts:
       - libqt5dbus5
       - libqt5svg5
       - libreadline6
+      - libcanberra-gtk-module
     after: [liblxi, desktop-qt5]
   liblxi:
     plugin: autotools
