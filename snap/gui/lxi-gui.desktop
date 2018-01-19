@@ -1,4 +1,7 @@
 [Desktop Entry]
-Name=LXI Tools
-Exec=lxi-gui
 Type=Application
+Exec=lxi-tools.lxi-gui
+Name=LXI Tools
+Comment=Tools for managing LXI compatible instruments
+Terminal=false
+Icon=${SNAP}/meta/gui/lxi-tools_256x256.png
