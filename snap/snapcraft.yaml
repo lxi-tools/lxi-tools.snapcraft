@@ -34,6 +34,7 @@ parts:
       - qt5-default
       - qt5-qmake
       - qtbase5-dev
+      - libqt5charts5-dev
       - libreadline-dev
     stage-packages:
       - libqt5core5a
@@ -41,6 +42,7 @@ parts:
       - libqt5widgets5
       - libqt5dbus5
       - libqt5svg5
+      - libqt5charts5
       - libreadline6
       - libcanberra-gtk-module
     after: [liblxi, desktop-qt5]
