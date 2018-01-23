@@ -12,8 +12,8 @@ icon: snap/gui/lxi-tools_256x256.png
 
 apps:
   lxi:
-    command: bin/lxi
-    completer: share/bash-completion/completions/lxi
+    command: usr/bin/lxi
+    completer: usr/share/bash-completion/completions/lxi
     plugs: [home, network, avahi-observe]
     aliases: [lxi]
   lxi-gui:
@@ -26,15 +26,14 @@ parts:
     source: https://github.com/lxi-tools/lxi-tools.git
     build: |
       ./autogen.sh
-      ./configure --prefix= --enable-lxi-gui
-      make STAGE=$SNAPCRAFT_STAGE
+      ./configure --prefix=/usr --enable-lxi-gui
+      make SNAPCRAFT=1 SNAPCRAFT_STAGE=$SNAPCRAFT_STAGE
     install: make install DESTDIR=$SNAPCRAFT_PART_INSTALL
     build-packages:
       - pkg-config
       - qt5-default
       - qt5-qmake
       - qtbase5-dev
-      - libqt5charts5-dev
       - libreadline-dev
     stage-packages:
       - libqt5core5a
@@ -42,12 +41,23 @@ parts:
       - libqt5widgets5
       - libqt5dbus5
       - libqt5svg5
-      - libqt5charts5
       - libreadline6
       - libcanberra-gtk-module
-    after: [liblxi, desktop-qt5]
+    after: [liblxi, desktop-qt5, qtcharts]
   liblxi:
     plugin: autotools
     source: https://github.com/lxi-tools/liblxi.git
     build-packages: [pkg-config]
     stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev, libxml2-dev]
+    configflags: [--prefix=/usr]
+  qtcharts:
+    plugin: qmake
+    source: https://github.com/qt/qtcharts.git
+    source-tag: release-2.1.0
+    qt-version: qt5
+    build-packages:
+      - qt5-default
+      - qtbase5-dev
+      - qttools5-dev
+      - build-essential
+      - qttools5-dev-tools
