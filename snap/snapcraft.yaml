@@ -19,6 +19,7 @@ apps:
   lxi-gui:
     command: desktop-launch lxi-gui
     plugs: [home, network, avahi-observe, desktop, desktop-legacy, x11, unity7, wayland]
+    aliases: [lxi-gui]
 
 parts:
   lxi-tools:
