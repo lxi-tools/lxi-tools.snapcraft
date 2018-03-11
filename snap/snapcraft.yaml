@@ -36,7 +36,7 @@ parts:
       - qt5-qmake
       - qtbase5-dev
       - libreadline-dev
-      - liblua5.3-dev
+      - liblua5.2-dev
     stage-packages:
       - libqt5core5a
       - libqt5gui5
@@ -45,7 +45,7 @@ parts:
       - libqt5svg5
       - libreadline6
       - libcanberra-gtk-module
-      - liblua5.3-0
+      - liblua5.2-0
     after: [liblxi, desktop-qt5, qtcharts]
   liblxi:
     plugin: autotools
