@@ -37,6 +37,7 @@ parts:
       - qtbase5-dev
       - libreadline-dev
       - liblua5.2-dev
+      - libtirpc-dev
     stage-packages:
       - libqt5core5a
       - libqt5gui5
