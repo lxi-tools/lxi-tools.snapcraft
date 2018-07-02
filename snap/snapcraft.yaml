@@ -47,6 +47,8 @@ parts:
       - libreadline6
       - libcanberra-gtk-module
       - liblua5.2-0
+      - ttf-ubuntu-font-family
+      - fonts-dejavu
     after: [liblxi, desktop-qt5, qtcharts]
   liblxi:
     plugin: autotools
