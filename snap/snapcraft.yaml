@@ -20,6 +20,8 @@ apps:
     command: desktop-launch lxi-gui
     plugs: [home, network, avahi-observe, x11, unity7, wayland, opengl, removable-media]
     aliases: [lxi-gui]
+    environment:
+      DISABLE_WAYLAND: 1
 
 parts:
   lxi-tools:
