@@ -16,35 +16,42 @@ apps:
     command: usr/bin/lxi
     completer: usr/share/bash-completion/completions/lxi.snap
     plugs: [home, network, avahi-observe]
-    aliases: [lxi]
-  lxi-gui:
-    command: desktop-launch lxi-gui
-    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
-    aliases: [lxi-gui]
+      #  lxi-gui:
+      #    command: lxi-gui
+      #    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
 
 parts:
   lxi-tools:
     plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
-    build: |
-      meson build --prefix=/usr
-      ninja -C build
-    install: ninja -C build install
+    meson-parameters: [--prefix=/usr]
     build-packages:
       - pkg-config
+      - liblxi-dev
       - libreadline-dev
       - liblua5.2-dev
-      - libtirpc-dev
       - bash-completion
     stage-packages:
       - liblxi1
-      - libreadline6
+      - libreadline5
       - liblua5.2-0
       - bash-completion
     after: [liblxi]
   liblxi:
     plugin: autotools
     source: https://github.com/lxi-tools/liblxi.git
-    build-packages: [pkg-config]
-    stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev, libxml2-dev]
-    configflags: [--prefix=/usr]
+    autotools-configure-parameters: [--prefix=/usr]
+    build-packages:
+      - pkg-config
+      - libavahi-core-dev
+      - libavahi-common-dev
+      - libavahi-client-dev
+      - libxml2-dev
+      - libtirpc-dev
+      - libc-dev-bin
+    stage-packages:
+      - libavahi-core7
+      - libavahi-common3
+      - libavahi-client3
+      - libxml2
+      - libicu66
