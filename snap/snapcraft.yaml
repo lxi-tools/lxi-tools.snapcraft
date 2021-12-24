@@ -1,14 +1,15 @@
 name: lxi-tools
-version: '1.21'
 summary: Open source LXI tools
 description: >
-  Lxi-tools is a collection of open source software tools that enables control
-  of LXI compatible instruments such as modern oscilloscopes, power supplies,
-  spectrum analyzers etc.
+  Lxi-tools is a collection of open source software tools for managing LXI
+  compatible instruments such as modern oscilloscopes, power supplies, spectrum
+  analyzers etc.
 
-grade: stable
-confinement: strict
+version: '1.22'
 icon: snap/gui/lxi-tools_256x256.png
+base: core20
+grade: devel
+confinement: strict
 
 apps:
   lxi:
@@ -18,54 +19,32 @@ apps:
     aliases: [lxi]
   lxi-gui:
     command: desktop-launch lxi-gui
-    plugs: [home, network, avahi-observe, x11, unity7, wayland, opengl, removable-media]
+    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
     aliases: [lxi-gui]
-    environment:
-      DISABLE_WAYLAND: 1
 
 parts:
   lxi-tools:
-    plugin: autotools
+    plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
     build: |
-      ./autogen.sh
-      ./configure --prefix=/usr --enable-lxi-gui
-      make SNAPCRAFT=1 SNAPCRAFT_STAGE=$SNAPCRAFT_STAGE
-    install: make install DESTDIR=$SNAPCRAFT_PART_INSTALL
+      meson build --prefix=/usr
+      ninja -C build
+    install: ninja -C build install
     build-packages:
       - pkg-config
-      - qt5-default
-      - qt5-qmake
-      - qtbase5-dev
       - libreadline-dev
       - liblua5.2-dev
       - libtirpc-dev
+      - bash-completion
     stage-packages:
-      - libqt5core5a
-      - libqt5gui5
-      - libqt5widgets5
-      - libqt5dbus5
-      - libqt5svg5
+      - liblxi1
       - libreadline6
-      - libcanberra-gtk-module
       - liblua5.2-0
-      - ttf-ubuntu-font-family
-      - fonts-dejavu
-    after: [liblxi, desktop-qt5, qtcharts]
+      - bash-completion
+    after: [liblxi]
   liblxi:
     plugin: autotools
     source: https://github.com/lxi-tools/liblxi.git
     build-packages: [pkg-config]
     stage-packages: [libavahi-core-dev, libavahi-common-dev, libavahi-client-dev, libxml2-dev]
     configflags: [--prefix=/usr]
-  qtcharts:
-    plugin: qmake
-    source: https://github.com/qt/qtcharts.git
-    source-tag: release-2.1.0
-    qt-version: qt5
-    build-packages:
-      - qt5-default
-      - qtbase5-dev
-      - qttools5-dev
-      - build-essential
-      - qttools5-dev-tools
