@@ -38,7 +38,7 @@ parts:
       - bash-completion
     after: [liblxi]
   liblxi:
-    plugin: autotools
+    plugin: meson
     source: https://github.com/lxi-tools/liblxi.git
     autotools-configure-parameters: [--prefix=/usr]
     build-packages:
@@ -48,7 +48,6 @@ parts:
       - libavahi-client-dev
       - libxml2-dev
       - libtirpc-dev
-      - libc-dev-bin
     stage-packages:
       - libavahi-core7
       - libavahi-common3
