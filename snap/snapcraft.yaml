@@ -32,7 +32,6 @@ parts:
       - liblua5.2-dev
       - bash-completion
     stage-packages:
-      - liblxi1
       - libreadline5
       - liblua5.2-0
       - bash-completion
@@ -40,7 +39,7 @@ parts:
   liblxi:
     plugin: meson
     source: https://github.com/lxi-tools/liblxi.git
-    autotools-configure-parameters: [--prefix=/usr]
+    meson-parameters: [--prefix=/usr]
     build-packages:
       - pkg-config
       - libavahi-core-dev
