@@ -10,16 +10,31 @@ base: core20
 grade: devel
 confinement: strict
 
+plugs:
+  dbus-plug-lxi-tools:
+    bus: session
+    interface: dbus
+    name: io.github.lxi-tools
+
+slots:
+  dbus-slot-lxi-tools:
+    interface: dbus
+    bus: session
+    name: io.github.lxi-tools
+
 apps:
   lxi:
     command: usr/bin/lxi
     plugs: [home, network, avahi-observe]
   lxi-gui:
     command: usr/bin/lxi-gui
-    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
+    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media, gsettings, dbus-plug-lxi-tools, desktop, desktop-launch]
+    slots: [dbus-slot-lxi-tools]
     environment:
       LC_ALL: C.UTF-8
       LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET"
+      LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
+      XDG_DATA_DIRS: "$SNAP/usr/share"
 
 build-packages:
   - pkg-config
@@ -30,10 +45,18 @@ build-packages:
 
 parts:
 
-  #  glib:
-  #    plugin: meson
-  #    source: https://gitlab.gnome.org/GNOME/glib/-/archive/2.71.0/glib-2.71.0.tar.gz
-  #    meson-parameters: [--prefix=/usr]
+  mesa:
+    plugin: nil
+    stage-packages:
+      - libglu1-mesa
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libegl-mesa0
+      - libegl1
+      - libegl1-mesa
+      - libglx-mesa0
+    build-attributes:
+      - no-patchelf
 
   gtk:
     plugin: meson
@@ -64,7 +87,6 @@ parts:
       - libcairo2
       - libdatrie1
       - libdrm2
-      - libegl1
       - libepoxy0
       - libfontconfig1
       - libfreetype6
@@ -110,14 +132,9 @@ parts:
       - libxkbcommon0
       - libxrandr2
       - libxrender1
-      - libglu1-mesa
-      - libgl1-mesa-dri
-      - libgl1-mesa-glx
-      - libegl-mesa0
-      - libegl1-mesa
-      - libglx-mesa0
       - gsettings-ubuntu-schemas
       - gsettings-desktop-schemas
+      - xdg-user-dirs
 
   liblxi:
     plugin: meson
@@ -151,4 +168,3 @@ parts:
       - libreadline5
       - liblua5.2-0
       - bash-completion
-
