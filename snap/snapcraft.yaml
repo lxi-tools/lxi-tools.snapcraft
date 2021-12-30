@@ -13,12 +13,28 @@ confinement: strict
 icon: snap/gui/lxi-tools_256x256.png
 
 plugs:
+  dbus-plug-freedesktop:
+    bus: session
+    interface: dbus
+    name: org.freedesktop.DBus
+  dbus-plug-gtk:
+    bus: session
+    interface: dbus
+    name: org.gtk
   dbus-plug-lxi-tools:
     bus: session
     interface: dbus
     name: io.github.lxi-tools
 
 slots:
+  dbus-slot-freedesktop:
+    bus: session
+    interface: dbus
+    name: org.freedesktop.DBus
+  dbus-slot-gtk:
+    bus: session
+    interface: dbus
+    name: org.gtk
   dbus-slot-lxi-tools:
     interface: dbus
     bus: session
@@ -29,16 +45,18 @@ apps:
     command: usr/bin/lxi
     plugs:
       - avahi-control
-      - avahi-observe
       - home
       - network
   lxi-gui:
     command: usr/bin/lxi-gui
     plugs:
+      - account-control
       - avahi-control
-      - avahi-observe
+      - dbus-plug-freedesktop
+      - dbus-plug-gtk
       - dbus-plug-lxi-tools
       - desktop
+      - desktop-legacy
       - gsettings
       - home
       - network
@@ -47,7 +65,10 @@ apps:
       - removable-media
       - x11
       - wayland
-    slots: [dbus-slot-lxi-tools]
+    slots:
+      - dbus-slot-freedesktop
+      - dbus-slot-gtk
+      - dbus-slot-lxi-tools
     environment:
       LC_ALL: C.UTF-8
       LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET"
