@@ -11,7 +11,7 @@ grade: devel
 confinement: strict
 
 apps:
-  lxi-tools:
+  lxi:
     command: usr/bin/lxi
     plugs: [home, network, avahi-observe]
       #  lxi-gui:
