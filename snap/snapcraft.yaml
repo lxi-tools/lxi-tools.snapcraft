@@ -14,15 +14,111 @@ apps:
   lxi:
     command: usr/bin/lxi
     plugs: [home, network, avahi-observe]
-      #  lxi-gui:
-      #    command: lxi-gui
-      #    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
+  lxi-gui:
+    command: usr/bin/lxi-gui
+    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
+    environment:
+      LC_ALL: C.UTF-8
+      LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET"
 
 build-packages:
   - pkg-config
   - cmake
+  - gettext
+  - appstream-util
+  - desktop-file-utils
 
 parts:
+
+  #  glib:
+  #    plugin: meson
+  #    source: https://gitlab.gnome.org/GNOME/glib/-/archive/2.71.0/glib-2.71.0.tar.gz
+  #    meson-parameters: [--prefix=/usr]
+
+  gtk:
+    plugin: meson
+    source: https://download-fallback.gnome.org/sources/gtk/4.5/gtk-4.5.1.tar.xz
+    meson-parameters: [--prefix=/usr]
+    build-attributes: [keep-execstack]
+    build-packages:
+      - libglib2.0-dev
+      - shared-mime-info
+      - libxkbcommon-dev
+      - libcairo2-dev
+      - libwayland-dev
+      - libxrandr-dev
+      - libxi-dev
+      - libxcursor-dev
+      - libxdamage-dev
+      - libxinerama-dev
+      - libgstreamer1.0-dev
+      - libgstreamer-plugins-bad1.0-dev
+      - libharfbuzz-dev
+      - libpango1.0-dev
+      - libgdk-pixbuf2.0-dev
+      - libepoxy-dev
+      - libgraphene-1.0-dev
+      - wayland-protocols
+    stage-packages:
+      - libcairo-gobject2
+      - libcairo-script-interpreter2
+      - libcairo2
+      - libdatrie1
+      - libdrm2
+      - libegl1
+      - libepoxy0
+      - libfontconfig1
+      - libfreetype6
+      - libfribidi0
+      - libgbm1
+      - libgdk-pixbuf2.0-0
+      - libgl1
+      - libglvnd0
+      - libglx0
+      - libgraphene-1.0-0
+      - libgraphite2-3
+      - libgstreamer-gl1.0-0
+      - libgstreamer-plugins-bad1.0-0
+      - libgstreamer-plugins-base1.0-0
+      - libgstreamer1.0-0
+      - libgudev-1.0-0
+      - libharfbuzz0b
+      - libjbig0
+      - libjpeg-turbo8
+      - liborc-0.4-0
+      - libpixman-1-0
+      - libpng16-16
+      - libthai0
+      - libtiff5
+      - libwayland-client0
+      - libwayland-egl1
+      - libwayland-server0
+      - libwebp6
+      - libx11-6
+      - libx11-xcb1
+      - libxau6
+      - libxcb-render0
+      - libxcb-shm0
+      - libxcb1
+      - libxcursor1
+      - libxdamage1
+      - libxdmcp6
+      - libxext6
+      - libxfixes3
+      - libxft2
+      - libxi6
+      - libxinerama1
+      - libxkbcommon0
+      - libxrandr2
+      - libxrender1
+      - libglu1-mesa
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libegl-mesa0
+      - libegl1-mesa
+      - libglx-mesa0
+      - gsettings-ubuntu-schemas
+      - gsettings-desktop-schemas
 
   liblxi:
     plugin: meson
@@ -43,11 +139,11 @@ parts:
       - libicu66
 
   lxi-tools:
-    after: [ liblxi ]
+    after: [ liblxi, gtk ]
     plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
     source-depth: 1
-    meson-parameters: [--prefix=/usr]
+    meson-parameters: [--prefix=/usr,-Dgui=true]
     build-packages:
       - libreadline-dev
       - liblua5.2-dev
@@ -56,3 +152,4 @@ parts:
       - libreadline5
       - liblua5.2-0
       - bash-completion
+
