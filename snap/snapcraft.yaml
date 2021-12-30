@@ -6,13 +6,12 @@ description: >
   analyzers etc.
 
 version: '1.22'
-icon: snap/gui/lxi-tools_256x256.png
 base: core20
 grade: devel
-confinement: strict
+confinement: classic
 
 apps:
-  lxi:
+  lxi-tools:
     command: usr/bin/lxi
     completer: usr/share/bash-completion/completions/lxi.snap
     plugs: [home, network, avahi-observe]
@@ -20,28 +19,18 @@ apps:
       #    command: lxi-gui
       #    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media]
 
+build-packages:
+  - pkg-config
+  - cmake
+
 parts:
-  lxi-tools:
-    plugin: meson
-    source: https://github.com/lxi-tools/lxi-tools.git
-    meson-parameters: [--prefix=/usr]
-    build-packages:
-      - pkg-config
-      - liblxi-dev
-      - libreadline-dev
-      - liblua5.2-dev
-      - bash-completion
-    stage-packages:
-      - libreadline5
-      - liblua5.2-0
-      - bash-completion
-    after: [liblxi]
+
   liblxi:
     plugin: meson
     source: https://github.com/lxi-tools/liblxi.git
+    source-depth: 1
     meson-parameters: [--prefix=/usr]
     build-packages:
-      - pkg-config
       - libavahi-core-dev
       - libavahi-common-dev
       - libavahi-client-dev
@@ -53,3 +42,19 @@ parts:
       - libavahi-client3
       - libxml2
       - libicu66
+      - libtirpc3
+
+  lxi-tools:
+    after: [ liblxi ]
+    plugin: meson
+    source: https://github.com/lxi-tools/lxi-tools.git
+    source-depth: 1
+    meson-parameters: [--prefix=/usr]
+    build-packages:
+      - libreadline-dev
+      - liblua5.2-dev
+      - bash-completion
+    stage-packages:
+      - libreadline5
+      - liblua5.2-0
+      - bash-completion
