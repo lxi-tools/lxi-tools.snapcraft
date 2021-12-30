@@ -8,12 +8,11 @@ description: >
 version: '1.22'
 base: core20
 grade: devel
-confinement: classic
+confinement: strict
 
 apps:
   lxi-tools:
     command: usr/bin/lxi
-    completer: usr/share/bash-completion/completions/lxi.snap
     plugs: [home, network, avahi-observe]
       #  lxi-gui:
       #    command: lxi-gui
