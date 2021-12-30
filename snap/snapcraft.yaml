@@ -39,7 +39,6 @@ parts:
     plugin: meson
     source: https://download-fallback.gnome.org/sources/gtk/4.5/gtk-4.5.1.tar.xz
     meson-parameters: [--prefix=/usr]
-    build-attributes: [keep-execstack]
     build-packages:
       - libglib2.0-dev
       - shared-mime-info
