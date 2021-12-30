@@ -26,24 +26,25 @@ apps:
   lxi:
     command: usr/bin/lxi
     plugs:
+      - avahi-control
+      - avahi-observe
       - home
       - network
-      - avahi-control
   lxi-gui:
     command: usr/bin/lxi-gui
     plugs:
-      - home
-      - network
       - avahi-control
       - avahi-observe
-      - wayland
-      - x11
-      - opengl
-      - removable-media
-      - gsettings
       - dbus-plug-lxi-tools
       - desktop
+      - gsettings
+      - home
+      - network
+      - opengl
       - process-control
+      - removable-media
+      - x11
+      - wayland
     slots: [dbus-slot-lxi-tools]
     environment:
       LC_ALL: C.UTF-8
@@ -174,7 +175,7 @@ parts:
       - libicu66
 
   lxi-tools:
-    after: [ liblxi, gtk ]
+    after: [liblxi, gtk]
     plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
     source-depth: 1
@@ -188,8 +189,8 @@ parts:
       - liblua5.2-0
       - bash-completion
 
-  desktop-settings-build:
-    after: [ lxi-tools ]
+  post-install-fixes:
+    after: [lxi-tools]
     plugin: nil
     override-prime: |
       set -eux
