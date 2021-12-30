@@ -10,6 +10,8 @@ base: core20
 grade: devel
 confinement: strict
 
+icon: snap/gui/lxi-tools_256x256.png
+
 plugs:
   dbus-plug-lxi-tools:
     bus: session
