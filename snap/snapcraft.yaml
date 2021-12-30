@@ -41,7 +41,6 @@ parts:
       - libavahi-client3
       - libxml2
       - libicu66
-      - libtirpc3
 
   lxi-tools:
     after: [ liblxi ]
