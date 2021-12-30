@@ -34,7 +34,7 @@ apps:
       LC_ALL: C.UTF-8
       LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET"
       LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
-      XDG_DATA_DIRS: "$SNAP/usr/share"
+      XDG_DATA_DIRS: "$SNAP/usr/share:$XDG_DATA_DIRS"
 
 build-packages:
   - pkg-config
@@ -42,6 +42,7 @@ build-packages:
   - gettext
   - appstream-util
   - desktop-file-utils
+  - libglib2.0-bin
 
 parts:
 
@@ -168,3 +169,10 @@ parts:
       - libreadline5
       - liblua5.2-0
       - bash-completion
+
+  desktop-settings-build:
+    after: [ lxi-tools ]
+    plugin: nil
+    override-prime: |
+      set -eux
+      glib-compile-schemas usr/share/glib-2.0/schemas
