@@ -25,16 +25,32 @@ slots:
 apps:
   lxi:
     command: usr/bin/lxi
-    plugs: [home, network, avahi-observe]
+    plugs:
+      - home
+      - network
+      - avahi-control
   lxi-gui:
     command: usr/bin/lxi-gui
-    plugs: [home, network, avahi-observe, wayland, x11, opengl, removable-media, gsettings, dbus-plug-lxi-tools, desktop, desktop-launch]
+    plugs:
+      - home
+      - network
+      - avahi-control
+      - avahi-observe
+      - wayland
+      - x11
+      - opengl
+      - removable-media
+      - gsettings
+      - dbus-plug-lxi-tools
+      - desktop
+      - process-control
     slots: [dbus-slot-lxi-tools]
     environment:
       LC_ALL: C.UTF-8
       LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET"
       LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
       XDG_DATA_DIRS: "$SNAP/usr/share:$XDG_DATA_DIRS"
+      XDG_CACHE_HOME: "$SNAP_USER_DATA/.cache"
 
 build-packages:
   - pkg-config
@@ -43,6 +59,8 @@ build-packages:
   - appstream-util
   - desktop-file-utils
   - libglib2.0-bin
+  - gtk-update-icon-cache
+  - dbus
 
 parts:
 
@@ -176,3 +194,7 @@ parts:
     override-prime: |
       set -eux
       glib-compile-schemas usr/share/glib-2.0/schemas
+      gtk-update-icon-cache -qtf usr/share/icons/hicolor
+      update-desktop-database -q usr/share/applications
+      mkdir -p var/lib/dbus
+      dbus-uuidgen > var/lib/dbus/machine-id
