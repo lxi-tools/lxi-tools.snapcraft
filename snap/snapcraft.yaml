@@ -102,7 +102,7 @@ parts:
 
   gtk:
     plugin: meson
-    source: https://download-fallback.gnome.org/sources/gtk/4.5/gtk-4.5.1.tar.xz
+    source: https://download-fallback.gnome.org/sources/gtk/4.6/gtk-4.6.0.tar.xz
     meson-parameters: [--prefix=/usr]
     build-packages:
       - libglib2.0-dev
@@ -123,6 +123,7 @@ parts:
       - libepoxy-dev
       - libgraphene-1.0-dev
       - wayland-protocols
+      - python3-gi
     stage-packages:
       - libcairo-gobject2
       - libcairo-script-interpreter2
