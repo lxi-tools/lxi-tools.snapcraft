@@ -62,7 +62,6 @@ apps:
       - network
       - opengl
       - process-control
-      - removable-media
       - x11
       - wayland
     slots:
