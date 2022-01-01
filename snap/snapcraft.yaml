@@ -36,7 +36,6 @@ apps:
   lxi-gui:
     command: usr/bin/lxi-gui
     plugs:
-      - account-control
       - avahi-control
       - desktop
       - desktop-legacy
