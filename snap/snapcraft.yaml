@@ -21,10 +21,6 @@ plugs:
     bus: session
     interface: dbus
     name: org.gtk
-  dbus-plug-lxi-tools:
-    bus: session
-    interface: dbus
-    name: io.github.lxi-tools
 
 slots:
   dbus-slot-freedesktop:
@@ -54,7 +50,6 @@ apps:
       - avahi-control
       - dbus-plug-freedesktop
       - dbus-plug-gtk
-      - dbus-plug-lxi-tools
       - desktop
       - desktop-legacy
       - gsettings
