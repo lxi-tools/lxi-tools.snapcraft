@@ -17,10 +17,6 @@ plugs:
     bus: session
     interface: dbus
     name: org.freedesktop.DBus
-  dbus-plug-gtk:
-    bus: session
-    interface: dbus
-    name: org.gtk
 
 slots:
   dbus-slot-freedesktop:
@@ -49,7 +45,6 @@ apps:
       - account-control
       - avahi-control
       - dbus-plug-freedesktop
-      - dbus-plug-gtk
       - desktop
       - desktop-legacy
       - gsettings
