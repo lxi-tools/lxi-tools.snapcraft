@@ -103,7 +103,7 @@ parts:
   gtk:
     plugin: meson
     source: https://download-fallback.gnome.org/sources/gtk/4.6/gtk-4.6.0.tar.xz
-    meson-parameters: [--prefix=/usr]
+    meson-parameters: [--prefix=/usr,--force-fallback-for=gdk-pixbuf]
     build-packages:
       - libglib2.0-dev
       - shared-mime-info
