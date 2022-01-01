@@ -12,12 +12,6 @@ confinement: strict
 
 icon: snap/gui/lxi-tools_256x256.png
 
-plugs:
-  dbus-plug-freedesktop:
-    bus: session
-    interface: dbus
-    name: org.freedesktop.DBus
-
 slots:
   dbus-slot-freedesktop:
     bus: session
@@ -44,7 +38,6 @@ apps:
     plugs:
       - account-control
       - avahi-control
-      - dbus-plug-freedesktop
       - desktop
       - desktop-legacy
       - gsettings
