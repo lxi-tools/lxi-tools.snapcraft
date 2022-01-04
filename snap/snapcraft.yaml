@@ -13,14 +13,6 @@ confinement: strict
 icon: snap/gui/lxi-tools_256x256.png
 
 slots:
-  dbus-slot-freedesktop:
-    bus: session
-    interface: dbus
-    name: org.freedesktop.DBus
-  dbus-slot-gtk:
-    bus: session
-    interface: dbus
-    name: org.gtk
   dbus-slot-lxi-tools:
     interface: dbus
     bus: session
@@ -43,12 +35,9 @@ apps:
       - home
       - network
       - opengl
-      - process-control
       - x11
       - wayland
     slots:
-      - dbus-slot-freedesktop
-      - dbus-slot-gtk
       - dbus-slot-lxi-tools
     environment:
       LC_ALL: C.UTF-8
