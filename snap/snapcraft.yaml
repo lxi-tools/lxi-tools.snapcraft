@@ -180,11 +180,11 @@ parts:
     meson-parameters: [--prefix=/usr,-Dgui=true]
     build-packages:
       - libreadline-dev
-      - liblua5.2-dev
+      - liblua5.3-dev
       - bash-completion
     stage-packages:
       - libreadline5
-      - liblua5.2-0
+      - liblua5.3-0
       - bash-completion
 
   post-install-fixes:
