@@ -14,6 +14,7 @@ version: '1.22'
 base: core20
 grade: devel
 confinement: strict
+
 icon: snap/gui/lxi-tools_256x256.png
 
 slots:
@@ -177,7 +178,7 @@ parts:
     plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
     source-depth: 1
-    meson-parameters: [--prefix=/usr,-Dgui=true]
+    meson-parameters: [--prefix=/usr,-Dgui=true,-Dgtksourceview:introspection=disabled]
     build-packages:
       - libreadline-dev
       - liblua5.3-dev
