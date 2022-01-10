@@ -76,14 +76,15 @@ parts:
       - no-patchelf
 
   gtk:
+    after: [mesa]
     plugin: meson
     source: https://download-fallback.gnome.org/sources/gtk/4.6/gtk-4.6.0.tar.xz
     meson-parameters:
       - --prefix=/usr
-      - --force-fallback-for=gdk-pixbuf
       - -Ddemos=false
       - -Dbuild-tests=false
       - -Dbuild-examples=false
+      - -Dgdk-pixbuf:builtin_loaders=all
     build-packages:
       - libglib2.0-dev
       - shared-mime-info
@@ -99,11 +100,16 @@ parts:
       - libgstreamer-plugins-bad1.0-dev
       - libharfbuzz-dev
       - libpango1.0-dev
-      - libgdk-pixbuf2.0-dev
       - libepoxy-dev
       - libgraphene-1.0-dev
       - wayland-protocols
       - python3-gi
+      - mesa-common-dev
+      - libglu1-mesa-dev
+      - libpng-dev
+      - libpixman-1-dev
+      - libjpeg-turbo8-dev
+      - libtiff-dev
     stage-packages:
       - libcairo-gobject2
       - libcairo-script-interpreter2
@@ -115,7 +121,6 @@ parts:
       - libfreetype6
       - libfribidi0
       - libgbm1
-      - libgdk-pixbuf2.0-0
       - libgl1
       - libglvnd0
       - libglx0
