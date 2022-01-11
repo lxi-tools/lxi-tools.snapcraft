@@ -75,8 +75,14 @@ parts:
     build-attributes:
       - no-patchelf
 
+  wayland-protocols:
+    plugin: meson
+    source: https://gitlab.freedesktop.org/wayland/wayland-protocols.git
+    source-tag: "1.24"
+    meson-parameters: [--prefix=/usr]
+
   gtk:
-    after: [mesa]
+    after: [mesa, wayland-protocols]
     plugin: meson
     source: https://download-fallback.gnome.org/sources/gtk/4.6/gtk-4.6.0.tar.xz
     meson-parameters:
