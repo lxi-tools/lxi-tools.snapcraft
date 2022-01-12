@@ -10,7 +10,7 @@ description: >
   benchmarking SCPI message performance, scripting for automation.  Both a
   commandline tool and a GUI application are available.
 
-version: '1.22'
+version: '2.0'
 base: core20
 grade: devel
 confinement: strict
