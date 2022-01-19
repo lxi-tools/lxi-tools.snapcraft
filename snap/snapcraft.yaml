@@ -14,6 +14,7 @@ version: '2.0'
 base: core20
 grade: devel
 confinement: strict
+
 icon: snap/gui/lxi-tools_256x256.png
 
 slots:
