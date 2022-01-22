@@ -4,4 +4,20 @@ This repository contains the snapcraft configuration used for creating the lxi-t
 
 The official snap is available at https://snapcraft.io/lxi-tools
 
-Visit https://snapcraft.io to see how to install snap for your distribution.
+Visit https://snapcraft.io to see how to use snaps on your distribution.
+
+Build:
+```
+snapcraft
+```
+
+Install:
+```
+snap install <snap file>
+```
+
+Run:
+```
+lxi-tools.lxi-gui
+lxi-tools.lxi
+```
