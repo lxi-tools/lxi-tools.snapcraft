@@ -63,19 +63,6 @@ build-packages:
 
 parts:
 
-  mesa:
-    plugin: nil
-    stage-packages:
-      - libglu1-mesa
-      - libgl1-mesa-dri
-      - libgl1-mesa-glx
-      - libegl-mesa0
-      - libegl1
-      - libegl1-mesa
-      - libglx-mesa0
-    build-attributes:
-      - no-patchelf
-
   wayland-protocols:
     plugin: meson
     source: https://gitlab.freedesktop.org/wayland/wayland-protocols.git
@@ -83,9 +70,10 @@ parts:
     meson-parameters: [--prefix=/usr]
 
   gtk:
-    after: [mesa, wayland-protocols]
+    after: [wayland-protocols]
     plugin: meson
-    source: https://download-fallback.gnome.org/sources/gtk/4.6/gtk-4.6.0.tar.xz
+    source: https://gitlab.gnome.org/GNOME/gtk.git
+    source-commit: 304527ab016f2ca72adc2e348927d1ea3584fd5d
     meson-parameters:
       - --prefix=/usr
       - -Ddemos=false
@@ -123,20 +111,16 @@ parts:
       - libpixman-1-dev
       - libjpeg-turbo8-dev
       - libtiff-dev
+      - libsass-dev
     stage-packages:
       - libcairo-gobject2
       - libcairo-script-interpreter2
       - libcairo2
       - libdatrie1
-      - libdrm2
       - libepoxy0
       - libfontconfig1
       - libfreetype6
       - libfribidi0
-      - libgbm1
-      - libgl1
-      - libglvnd0
-      - libglx0
       - libgraphene-1.0-0
       - libgraphite2-3
       - libgstreamer-gl1.0-0
@@ -152,10 +136,28 @@ parts:
       - libpng16-16
       - libthai0
       - libtiff5
-      - libwayland-client0
-      - libwayland-egl1
-      - libwayland-server0
       - libwebp6
+      - gsettings-ubuntu-schemas
+      - gsettings-desktop-schemas
+      - xdg-user-dirs
+      - adwaita-icon-theme
+      - adwaita-icon-theme-full
+      - yaru-theme-icon
+      - libwayland-egl1-mesa
+      - libwayland-egl1
+      - libwayland-client0
+      - libwayland-server0
+      - libgbm1
+      - libglu1-mesa
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libegl-mesa0
+      - libegl1
+      - libegl1-mesa
+      - libglx-mesa0
+      - libgles2-mesa
+      - libglapi-mesa
+      - libgl1
       - libx11-6
       - libx11-xcb1
       - libxau6
@@ -173,17 +175,7 @@ parts:
       - libxkbcommon0
       - libxrandr2
       - libxrender1
-      - gsettings-ubuntu-schemas
-      - gsettings-desktop-schemas
-      - xdg-user-dirs
-      - adwaita-icon-theme
-      - adwaita-icon-theme-full
-      - yaru-theme-icon
-      - libgl1-mesa-dri
-      - libgles2-mesa
-      - libglapi-mesa
-      - libegl1-mesa
-      - libwayland-egl1-mesa
+      - libsass1
 
   liblxi:
     plugin: meson
