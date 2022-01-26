@@ -170,6 +170,9 @@ parts:
       - gsettings-ubuntu-schemas
       - gsettings-desktop-schemas
       - xdg-user-dirs
+      - adwaita-icon-theme
+      - adwaita-icon-theme-full
+      - yaru-theme-icon
 
   liblxi:
     plugin: meson
