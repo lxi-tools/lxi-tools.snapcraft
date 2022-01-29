@@ -60,6 +60,7 @@ build-packages:
   - libglib2.0-bin
   - gtk-update-icon-cache
   - dbus
+  - libxml2-utils
 
 parts:
 
