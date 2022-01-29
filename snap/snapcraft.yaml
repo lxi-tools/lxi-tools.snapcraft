@@ -217,6 +217,8 @@ parts:
       set -eux
       glib-compile-schemas usr/share/glib-2.0/schemas
       gtk-update-icon-cache -qtf usr/share/icons/hicolor
+      gtk-update-icon-cache -qtf usr/share/icons/Adwaita
+      gtk-update-icon-cache -qtf usr/share/icons/Yaru
       update-desktop-database -q usr/share/applications
       mkdir -p var/lib/dbus
       dbus-uuidgen > var/lib/dbus/machine-id
