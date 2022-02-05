@@ -46,7 +46,7 @@ apps:
       - dbus-slot-lxi-tools
     environment:
       LC_ALL: C.UTF-8
-      LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET"
+      LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
       LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
       XDG_DATA_DIRS: "$SNAP/usr/share:$XDG_DATA_DIRS"
       XDG_CACHE_HOME: "$SNAP_USER_DATA/.cache"
