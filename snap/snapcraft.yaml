@@ -70,11 +70,18 @@ parts:
     source-tag: "1.24"
     meson-parameters: [--prefix=/usr]
 
+  patches:
+    plugin: dump
+    source: patches
+
   gtk:
-    after: [wayland-protocols]
+    after: [wayland-protocols, patches]
     plugin: meson
     source: https://gitlab.gnome.org/GNOME/gtk.git
-    source-commit: 90bccf4e822cdc31f57d7f77b73dbb5a1f9bd2a9
+    source-commit: 92051931474a1fa41f723b3d41ab53c6cd410e79
+    override-pull: |
+      snapcraftctl pull
+      patch -p1 -i $SNAPCRAFT_STAGE/gtk-disable-fast-resource-building.patch
     meson-parameters:
       - --prefix=/usr
       - -Ddemos=false

@@ -1,0 +1,13 @@
+diff --git a/gtk/meson.build b/gtk/meson.build
+index 9e01201522..8806fbf6ed 100644
+--- a/gtk/meson.build
++++ b/gtk/meson.build
+@@ -872,6 +872,8 @@ endif
+ 
+ ld = find_program('ld', required : false)
+ 
++objcopy_supports_add_symbol = false
++
+ if not meson.is_cross_build() and build_machine.system() == 'linux' and objcopy.found() and objcopy_supports_add_symbol and ld.found()
+   glib_compile_resources = find_program('glib-compile-resources')
+ 
