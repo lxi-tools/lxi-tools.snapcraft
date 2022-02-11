@@ -74,7 +74,7 @@ parts:
     after: [wayland-protocols]
     plugin: meson
     source: https://gitlab.gnome.org/GNOME/gtk.git
-    source-commit: 72bbc51ba9e8f521f9c18b974c06638f692a2767
+    source-commit: 90bccf4e822cdc31f57d7f77b73dbb5a1f9bd2a9
     meson-parameters:
       - --prefix=/usr
       - -Ddemos=false
