@@ -26,6 +26,7 @@ slots:
 apps:
   lxi:
     command: usr/bin/lxi
+    completer: usr/share/bash-completion/completions/lxi
     plugs:
       - avahi-control
       - home
