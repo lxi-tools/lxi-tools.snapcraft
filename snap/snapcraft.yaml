@@ -65,6 +65,12 @@ build-packages:
 
 parts:
 
+  glib:
+    plugin: meson
+    source: https://gitlab.gnome.org/GNOME/glib.git
+    source-tag: 2.70.5
+    meson-parameters: [--prefix=/usr]
+
   wayland-protocols:
     plugin: meson
     source: https://gitlab.freedesktop.org/wayland/wayland-protocols.git
@@ -76,10 +82,10 @@ parts:
     source: patches
 
   gtk:
-    after: [wayland-protocols, patches]
+    after: [glib, wayland-protocols, patches]
     plugin: meson
     source: https://gitlab.gnome.org/GNOME/gtk.git
-    source-commit: 92051931474a1fa41f723b3d41ab53c6cd410e79
+    source-tag: 4.6.7
     override-pull: |
       snapcraftctl pull
       patch -p1 -i $SNAPCRAFT_STAGE/gtk-disable-fast-resource-building.patch
