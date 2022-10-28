@@ -106,6 +106,38 @@ parts:
       - libgtk-4-1
       - libegl1
       - libegl1-mesa
+      - libwayland-egl1-mesa
+      - libwayland-egl1
+      - libwayland-client0
+      - libwayland-server0
+      - libgbm1
+      - libglu1-mesa
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libegl-mesa0
+      - libegl1
+      - libegl1-mesa
+      - libglx-mesa0
+      - libgles2-mesa
+      - libglapi-mesa
+      - libgl1
+      - libx11-6
+      - libx11-xcb1
+      - libxau6
+      - libxcb-render0
+      - libxcb-shm0
+      - libxcb1
+      - libxcursor1
+      - libxdamage1
+      - libxdmcp6
+      - libxext6
+      - libxfixes3
+      - libxft2
+      - libxi6
+      - libxinerama1
+      - libxkbcommon0
+      - libxrandr2
+      - libxrender1
 
   post-install-fixes:
     after: [lxi-tools]
