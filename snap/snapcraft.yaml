@@ -104,6 +104,8 @@ parts:
       - liblua5.4-0
       - bash-completion
       - libgtk-4-1
+      - libegl1
+      - libegl1-mesa
 
   post-install-fixes:
     after: [lxi-tools]
