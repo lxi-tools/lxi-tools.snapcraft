@@ -97,6 +97,7 @@ parts:
       - liblua5.4-dev
       - bash-completion
       - libgtk-4-dev
+      - libgtksourceview-5-dev
       - meson
       - ninja-build
     stage-packages:
@@ -104,6 +105,7 @@ parts:
       - liblua5.4-0
       - bash-completion
       - libgtk-4-1
+      - libgtksourceview-5-0
       - libegl1
       - libegl1-mesa
 
