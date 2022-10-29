@@ -10,7 +10,7 @@ description: >
   message performance, and powerful scripting for test automation. Both a
   commandline tool and a GUI application are available.
 
-version: '2.3'
+version: '2.4'
 base: core22
 grade: stable
 confinement: strict
