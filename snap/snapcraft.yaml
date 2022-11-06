@@ -122,3 +122,4 @@ parts:
       update-desktop-database -q usr/share/applications
       mkdir -p var/lib/dbus
       dbus-uuidgen > var/lib/dbus/machine-id
+      ./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/gdk-pixbuf-query-loaders > usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders.cache
