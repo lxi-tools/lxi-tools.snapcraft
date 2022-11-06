@@ -108,6 +108,7 @@ parts:
       - libgtksourceview-5-0
       - libegl1
       - libegl1-mesa
+      - libgdk-pixbuf-2.0-0
 
   post-install-fixes:
     after: [lxi-tools]
