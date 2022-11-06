@@ -51,6 +51,9 @@ apps:
       LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
       XDG_DATA_DIRS: "$SNAP/usr/share:$XDG_DATA_DIRS"
       XDG_CACHE_HOME: "$SNAP_USER_DATA/.cache"
+      GDK_PIXBUF_MODULEDIR: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0"
+      GDK_PIXBUF_MODULE_FILE: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+      XKB_CONFIG_ROOT: "$SNAP/usr/share/X11/xkb"
 
 build-packages:
   - pkg-config
