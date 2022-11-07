@@ -10,7 +10,7 @@ description: >
   message performance, and powerful scripting for test automation. Both a
   commandline tool and a GUI application are available.
 
-version: '2.3'
+version: '2.4'
 base: core22
 grade: stable
 confinement: strict
@@ -92,7 +92,6 @@ parts:
     after: [liblxi]
     plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
-    source-tag: v2.3
     source-depth: 1
     meson-parameters: [--prefix=/usr,-Dgui=true,-Dgtksourceview:introspection=disabled]
     build-packages:
