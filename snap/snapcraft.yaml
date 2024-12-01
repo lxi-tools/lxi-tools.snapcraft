@@ -10,8 +10,8 @@ description: >
   message performance, and powerful scripting for test automation. Both a
   commandline tool and a GUI application are available.
 
-version: '2.7'
-base: core22
+adopt-info: lxi-tools
+base: core24
 grade: stable
 confinement: strict
 
@@ -33,6 +33,7 @@ apps:
       - network
   lxi-gui:
     command: usr/bin/lxi-gui
+    extensions: [gnome]
     plugs:
       - avahi-control
       - desktop
@@ -47,11 +48,11 @@ apps:
       - dbus-slot-lxi-tools
     environment:
       LC_ALL: C.UTF-8
-      LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
-      LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/dri"
+      LD_LIBRARY_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$SNAP/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/dri:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy"
+      LIBGL_DRIVERS_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/dri"
       XDG_DATA_DIRS: "$SNAP/usr/share:$XDG_DATA_DIRS"
       XDG_CACHE_HOME: "$SNAP_USER_DATA/.cache"
-      GDK_PIXBUF_MODULE_FILE: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+      GDK_PIXBUF_MODULE_FILE: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/2.10.0/loaders.cache"
       XKB_CONFIG_ROOT: "$SNAP/usr/share/X11/xkb"
 
 build-packages:
@@ -86,43 +87,44 @@ parts:
       - libavahi-common3
       - libavahi-client3
       - libxml2
-      - libicu70
+      - libicu74
 
   lxi-tools:
     after: [liblxi]
     plugin: meson
     source: https://github.com/lxi-tools/lxi-tools.git
-    source-depth: 1
+    source-depth: 0
     meson-parameters: [--prefix=/usr,-Dgui=true,-Dgtksourceview:introspection=disabled]
     build-packages:
       - libreadline-dev
       - liblua5.4-dev
       - bash-completion
-      - libgtk-4-dev
-      - libgtksourceview-5-dev
       - meson
       - ninja-build
     stage-packages:
       - libreadline8
       - liblua5.4-0
       - bash-completion
-      - libgtk-4-1
-      - libgtksourceview-5-0
-      - libegl1
-      - libegl1-mesa
       - libgdk-pixbuf-2.0-0
+    override-pull: |
+       craftctl default
+       craftctl set version=$(git describe --always --dirty | sed 's/^v//')
 
   post-install-fixes:
     after: [lxi-tools]
     plugin: nil
     override-prime: |
       set -eux
+      craftctl default
       glib-compile-schemas usr/share/glib-2.0/schemas
-      gtk-update-icon-cache -qtf usr/share/icons/hicolor
-      gtk-update-icon-cache -qtf usr/share/icons/Adwaita
-      # gtk-update-icon-cache -qtf usr/share/icons/Yaru
+      for dir in usr/share/icons/*; do
+        if [ -f "$dir/index.theme" ]; then
+          gtk-update-icon-cache --force "$dir"
+        fi
+      done
       update-desktop-database -q usr/share/applications
       mkdir -p var/lib/dbus
       dbus-uuidgen > var/lib/dbus/machine-id
-      ./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/gdk-pixbuf-query-loaders > usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders.cache
-      sed -i 's%/usr/lib/x86_64-linux-gnu%/snap/lxi-tools/current/usr/lib/x86_64-linux-gnu%g' usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gdk-pixbuf-2.0/2.10.0/loaders.cache
+      ./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/gdk-pixbuf-query-loaders > usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/2.10.0/loaders.cache
+      sed -i 's%/usr/lib/x86_64-linux-gnu%/snap/lxi-tools/current/usr/lib/x86_64-linux-gnu%g' usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/2.10.0/loaders.cache
+
