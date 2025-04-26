@@ -54,6 +54,8 @@ apps:
       XDG_CACHE_HOME: "$SNAP_USER_DATA/.cache"
       GDK_PIXBUF_MODULE_FILE: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/2.10.0/loaders.cache"
       XKB_CONFIG_ROOT: "$SNAP/usr/share/X11/xkb"
+      LUA_PATH: "$SNAP/usr/share/lua/5.4/?.lua;$SNAP/usr/lib/lua/?.lua"
+      LUA_CPATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lua/5.4/?.so"
 
 build-packages:
   - pkg-config
@@ -106,6 +108,8 @@ parts:
       - liblua5.4-0
       - bash-completion
       - libgdk-pixbuf-2.0-0
+      - lua-socket
+      - lua-cjson
     override-pull: |
        craftctl default
        craftctl set version=$(git describe --always --dirty | sed 's/^v//')
